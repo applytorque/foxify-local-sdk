@@ -1,10 +1,13 @@
-import { TradingStorage } from "@/contracts/types/generated";
+// import { TradingStorage } from "@/contracts/types/generated";
+import { Contracts } from "@/contracts/types";
 import { BigNumber } from "ethers";
 import { BorrowingFee } from "./fees/borrowing";
 
 export type PairIndexes = {
   [key: string]: number;
 };
+
+type StorageType = Contracts['storage']
 
 export type TradeContainer = {
   trade: Trade;
@@ -60,10 +63,12 @@ export type LimitOrder = {
   type: number;
 };
 
-export type LimitOrderRaw = TradingStorage.OpenLimitOrderStructOutput & {
+// export type LimitOrderRaw = TradingStorage.OpenLimitOrderStructOutput & {
+//   type: number;
+// };
+export type LimitOrderRaw = StorageType['OpenLimitOrderStructOutput'] & {
   type: number;
 };
-
 export type Fee = {
   closeFeeP: number;
   minLevPosStable: number;
@@ -173,9 +178,24 @@ export enum PositionType {
   SHORT = "SHORT",
 }
 
+// export type TradeContainerRaw = {
+//   trade: TradingStorage.TradeStruct;
+//   tradeInfo: TradingStorage.TradeInfoStruct;
+//   initialAccFees: {
+//     rollover: BigNumber;
+//     funding: BigNumber;
+//     openedAfterUpdate: boolean;
+//     borrowing: {
+//       accPairFee: number;
+//       accGroupFee: number;
+//       block: number;
+//     };
+//   };
+// };
+
 export type TradeContainerRaw = {
-  trade: TradingStorage.TradeStruct;
-  tradeInfo: TradingStorage.TradeInfoStruct;
+  trade: StorageType['TradeStruct'];
+  tradeInfo: StorageType['TradeInfoStruct'];
   initialAccFees: {
     rollover: BigNumber;
     funding: BigNumber;
@@ -187,7 +207,6 @@ export type TradeContainerRaw = {
     };
   };
 };
-
 export enum OpenLimitOrderType {
   LEGACY = 0,
   REVERSAL = 1,
