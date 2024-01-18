@@ -1,4 +1,7 @@
 // import { TradingStorage } from "@/contracts/types/generated";
+
+
+//  Contracts import TradingStorage
 import { Contracts } from "@/contracts/types";
 import { BigNumber } from "ethers";
 import { BorrowingFee } from "./fees/borrowing";
@@ -7,6 +10,7 @@ export type PairIndexes = {
   [key: string]: number;
 };
 
+// assign TradingStorage  to StorageType
 type StorageType = Contracts['storage']
 
 export type TradeContainer = {
@@ -66,6 +70,10 @@ export type LimitOrder = {
 // export type LimitOrderRaw = TradingStorage.OpenLimitOrderStructOutput & {
 //   type: number;
 // };
+
+
+
+// accessing the OpenLimitOrderStructOutput struct of TradingStorage Contracts
 export type LimitOrderRaw = StorageType['OpenLimitOrderStructOutput'] & {
   type: number;
 };
@@ -193,6 +201,8 @@ export enum PositionType {
 //   };
 // };
 
+
+//  accessing the TradeStruct of TradingStorage  to trade
 export type TradeContainerRaw = {
   trade: StorageType['TradeStruct'];
   tradeInfo: StorageType['TradeInfoStruct'];
